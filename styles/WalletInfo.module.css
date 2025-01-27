@@ -1,0 +1,47 @@
+.walletInfo {
+  background-color: #1e293b;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .infoGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.infoItem {
+  background-color: #2d3748;
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.infoLabel {
+  font-size: 14px;
+  color: #a0aec0;
+  margin-bottom: 8px;
+}
+
+.infoValue {
+  font-size: 18px;
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.balance {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.balanceSymbol {
+  font-size: 16px;
+  color: #a0aec0;
+  margin-left: 4px;
+}

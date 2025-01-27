@@ -6,6 +6,7 @@ import { InjectedConnector } from 'wagmi/connectors/injected';
 import WalletInfo from './WalletInfo';
 import TransactionHistory from './TransactionHistory';
 import DAppInteraction from './DAppInteraction';
+import styles from '@/styles/Dashboard.module.css';
 
 export default function Dashboard() {
   const { address, isConnected } = useAccount();
@@ -17,71 +18,64 @@ export default function Dashboard() {
 
   if (!isConnected) {
     return (
-      <div className='flex flex-col items-center justify-center min-h-screen'>
-        <h1 className='text-4xl font-bold mb-8'>Web3 Wallet Dashboard</h1>
-        <button
-          onClick={() => connect()}
-          className='bg-primary text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition-colors'
-        >
-          Connect Wallet
-        </button>
+      <div className={styles.centerContent}>
+        <div className={styles.connectWallet}>
+          <h1>Web3 Wallet Dashboard</h1>
+          <p>Connect your wallet to get started</p>
+          <button onClick={() => connect()} className='btn btn-primary'>
+            Connect Wallet
+          </button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className='max-w-6xl mx-auto'>
-      <header className='flex justify-between items-center mb-8'>
-        <h1 className='text-3xl font-bold'>Web3 Wallet Dashboard</h1>
-        <button
-          onClick={() => disconnect()}
-          className='bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-700 transition-colors'
-        >
-          Disconnect
-        </button>
+    <div className={styles.dashboard}>
+      <header className={styles.header}>
+        <div className={`container ${styles.headerContent}`}>
+          <h1 className={styles.title}>Web3 Wallet Dashboard</h1>
+          <button onClick={() => disconnect()} className='btn btn-secondary'>
+            Disconnect
+          </button>
+        </div>
       </header>
-      <nav className='mb-8'>
-        <ul className='flex space-x-4'>
-          <li>
+      <main className={styles.main}>
+        <div className='container'>
+          <div className={styles.tabs}>
             <button
               onClick={() => setActiveTab('wallet')}
-              className={`py-2 px-4 rounded ${
-                activeTab === 'wallet' ? 'bg-primary text-white' : 'bg-surface'
+              className={`btn ${
+                activeTab === 'wallet' ? 'btn-primary' : 'btn-secondary'
               }`}
             >
               Wallet
             </button>
-          </li>
-          <li>
             <button
               onClick={() => setActiveTab('transactions')}
-              className={`py-2 px-4 rounded ${
-                activeTab === 'transactions'
-                  ? 'bg-primary text-white'
-                  : 'bg-surface'
+              className={`btn ${
+                activeTab === 'transactions' ? 'btn-primary' : 'btn-secondary'
               }`}
             >
               Transactions
             </button>
-          </li>
-          <li>
             <button
               onClick={() => setActiveTab('dapps')}
-              className={`py-2 px-4 rounded ${
-                activeTab === 'dapps' ? 'bg-primary text-white' : 'bg-surface'
+              className={`btn ${
+                activeTab === 'dapps' ? 'btn-primary' : 'btn-secondary'
               }`}
             >
               DApps
             </button>
-          </li>
-        </ul>
-      </nav>
-      <main>
-        {activeTab === 'wallet' && <WalletInfo address={address} />}
-        {activeTab === 'transactions' && (
-          <TransactionHistory address={address} />
-        )}
-        {activeTab === 'dapps' && <DAppInteraction />}
+          </div>
+          <div className={styles.content}>
+            {activeTab === 'wallet' && <WalletInfo address={address} />}
+            {activeTab === 'transactions' && (
+              <TransactionHistory address={address} />
+            )}
+            {activeTab === 'dapps' && <DAppInteraction />}
+          </div>
+        </div>
       </main>
     </div>
   );

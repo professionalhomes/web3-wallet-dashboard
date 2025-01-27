@@ -1,6 +1,5 @@
-'use client';
-
 import { useBalance } from 'wagmi';
+import styles from '@/styles/WalletInfo.module.css';
 
 interface WalletInfoProps {
   address: `0x${string}` | undefined;
@@ -12,15 +11,27 @@ export default function WalletInfo({ address }: WalletInfoProps) {
   });
 
   return (
-    <div className='bg-surface p-6 rounded-lg shadow-lg'>
-      <h2 className='text-2xl font-bold mb-4'>Wallet Information</h2>
-      <p className='mb-2'>
-        <span className='font-semibold'>Address:</span> {address}
-      </p>
-      <p>
-        <span className='font-semibold'>Balance:</span>{' '}
-        {balance ? `${balance.formatted} ${balance.symbol}` : 'Loading...'}
-      </p>
+    <div className={styles.walletInfo}>
+      <h2>Wallet Information</h2>
+      <div className={styles.infoGrid}>
+        <div className={styles.infoItem}>
+          <div className={styles.infoLabel}>Address</div>
+          <div className={styles.infoValue}>{address}</div>
+        </div>
+        <div className={styles.infoItem}>
+          <div className={styles.infoLabel}>Balance</div>
+          <div className={styles.infoValue}>
+            {balance ? (
+              <span className={styles.balance}>
+                {balance.formatted}
+                <span className={styles.balanceSymbol}>{balance.symbol}</span>
+              </span>
+            ) : (
+              'Loading...'
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

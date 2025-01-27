@@ -1,7 +1,5 @@
-'use client';
-
 import { useState } from 'react';
-import { ethers } from 'ethers';
+import styles from '@/styles/DAppInteraction.module.css';
 
 export default function DAppInteraction() {
   const [contractAddress, setContractAddress] = useState('');
@@ -24,51 +22,57 @@ export default function DAppInteraction() {
   };
 
   return (
-    <div className='bg-surface p-6 rounded-lg shadow-lg'>
-      <h2 className='text-2xl font-bold mb-4'>DApp Interaction</h2>
-      <div className='mb-4'>
-        <label htmlFor='contractAddress' className='block mb-2'>
-          Contract Address:
-        </label>
-        <input
-          id='contractAddress'
-          type='text'
-          value={contractAddress}
-          onChange={(e) => setContractAddress(e.target.value)}
-          className='w-full p-2 bg-background text-text rounded'
-        />
-      </div>
-      <div className='mb-4'>
-        <label htmlFor='functionName' className='block mb-2'>
-          Function Name:
-        </label>
-        <input
-          id='functionName'
-          type='text'
-          value={functionName}
-          onChange={(e) => setFunctionName(e.target.value)}
-          className='w-full p-2 bg-background text-text rounded'
-        />
-      </div>
-      <div className='mb-4'>
-        <label htmlFor='functionArgs' className='block mb-2'>
-          Function Arguments (comma-separated):
-        </label>
-        <input
-          id='functionArgs'
-          type='text'
-          value={functionArgs}
-          onChange={(e) => setFunctionArgs(e.target.value)}
-          className='w-full p-2 bg-background text-text rounded'
-        />
-      </div>
-      <button
-        onClick={handleInteraction}
-        className='bg-secondary text-white font-bold py-2 px-4 rounded hover:bg-green-700 transition-colors'
-      >
-        Interact with DApp
-      </button>
-      {result && <p className='mt-4'>{result}</p>}
+    <div className={styles.dappInteraction}>
+      <h2>DApp Interaction</h2>
+      <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
+        <div className={styles.formGroup}>
+          <label htmlFor='contractAddress' className={styles.label}>
+            Contract Address
+          </label>
+          <input
+            id='contractAddress'
+            type='text'
+            value={contractAddress}
+            onChange={(e) => setContractAddress(e.target.value)}
+            placeholder='0x...'
+            className={styles.input}
+          />
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor='functionName' className={styles.label}>
+            Function Name
+          </label>
+          <input
+            id='functionName'
+            type='text'
+            value={functionName}
+            onChange={(e) => setFunctionName(e.target.value)}
+            placeholder='transfer'
+            className={styles.input}
+          />
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor='functionArgs' className={styles.label}>
+            Function Arguments (comma-separated)
+          </label>
+          <input
+            id='functionArgs'
+            type='text'
+            value={functionArgs}
+            onChange={(e) => setFunctionArgs(e.target.value)}
+            placeholder='0x123..., 100'
+            className={styles.input}
+          />
+        </div>
+        <button onClick={handleInteraction} className={styles.button}>
+          Interact with DApp
+        </button>
+      </form>
+      {result && (
+        <div className={styles.result}>
+          <p>{result}</p>
+        </div>
+      )}
     </div>
   );
 }

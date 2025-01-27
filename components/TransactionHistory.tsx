@@ -1,7 +1,5 @@
-'use client';
-
 import { useState, useEffect } from 'react';
-import { ethers } from 'ethers';
+import styles from '@/styles/TransactionHistory.module.css';
 
 interface Transaction {
   hash: string;
@@ -36,6 +34,12 @@ export default function TransactionHistory({
             to: address,
             value: '0.05',
           },
+          {
+            hash: '0xmno...pqr',
+            from: address,
+            to: '0xstu...vwx',
+            value: '0.2',
+          },
         ];
         setTransactions(mockTransactions);
       }
@@ -44,23 +48,23 @@ export default function TransactionHistory({
   }, [address]);
 
   return (
-    <div className='bg-surface p-6 rounded-lg shadow-lg'>
-      <h2 className='text-2xl font-bold mb-4'>Transaction History</h2>
-      <table className='w-full'>
+    <div className={styles.transactionHistory}>
+      <h2>Transaction History</h2>
+      <table className={styles.table}>
         <thead>
-          <tr>
-            <th className='text-left'>Hash</th>
-            <th className='text-left'>From</th>
-            <th className='text-left'>To</th>
-            <th className='text-left'>Value (ETH)</th>
+          <tr className={styles.tableHeader}>
+            <th>Hash</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Value (ETH)</th>
           </tr>
         </thead>
         <tbody>
           {transactions.map((tx) => (
-            <tr key={tx.hash}>
-              <td>{tx.hash}</td>
-              <td>{tx.from}</td>
-              <td>{tx.to}</td>
+            <tr key={tx.hash} className={styles.tableRow}>
+              <td className={styles.hash}>{tx.hash}</td>
+              <td className={styles.hash}>{tx.from}</td>
+              <td className={styles.hash}>{tx.to}</td>
               <td>{tx.value}</td>
             </tr>
           ))}
