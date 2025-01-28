@@ -1,37 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Web3 Wallet Dashboard
 
-## Getting Started
+## Overview
 
-First, run the development server:
+Web3 Wallet Dashboard is a modern, user-friendly interface for interacting with blockchain wallets and decentralized applications (dApps). Built with React, Next.js, and ethers.js, this dashboard provides a seamless experience for users to manage their cryptocurrency assets and interact with the blockchain.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Features
+
+- **Wallet Connection**: Easily connect your Web3 wallet (e.g., MetaMask) to the dashboard
+- **Balance Display**: View your wallet's ETH balance in real-time
+- **Transaction History**: Track and monitor your recent transactions
+- **DApp Interaction**: Seamlessly interact with smart contracts and dApps
+- **Responsive Design**: Fully responsive interface with a modern dark theme
+- **Background Effects**: Subtle animated background design for enhanced visual appeal
+
+## Technologies Used
+
+- React 18
+- Next.js 13 (App Router)
+- TypeScript
+- ethers.js
+- wagmi
+
+## Setup and Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/alexandriaroberts/web3-wallet-dashboard.git
+   cd web3-wallet-dashboard
+   ```
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+## Usage Guide
+
+1. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+2. **Open your browser**
+   Navigate to `http://localhost:3000` to view the dashboard.
+
+## Usage Guide
+
+Connect your wallet: Click on the "Connect Wallet" button to connect your Web3 wallet (e.g., MetaMask).
+View balance: Once connected, your wallet's ETH balance will be displayed in real-time.
+Transaction history: View your recent transactions in the "Transaction History" tab.
+Interact with dApps: Use the "DApp Interaction" tab to interact with smart contracts and decentralized applications.
+
+## Project Structure
+
+```
+web3-wallet-dashboard/
+├── app/
+│   ├── providers.tsx
+│   ├── globals.css
+│   └── ...
+├── components/
+│   ├── Dashboard.tsx
+│   ├── WalletInfo.tsx
+│   ├── TransactionHistory.tsx
+│   ├── DAppInteraction.tsx
+│   └── ...
+├── pages/
+│   ├── _app.tsx
+│   ├── index.tsx
+│   └── ...
+├── public/
+│   ├── favicon.ico
+│   └── ...
+├── styles/
+│   ├── Dashboard.module.css
+│   ├── WalletInfo.module.css
+│   └── ...
+├── .env.local
+├── package.json
+├── tailwind.config.ts
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Potential Future Enhancements
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Multi-chain Support**: Add support for multiple blockchain networks
+- **Token Management**: Enable users to manage various tokens within their wallet
+- **Enhanced Security**: Implement additional security features such as two-factor authentication
+- **Mobile App**: Develop a mobile application for iOS and Android
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Contribution Guidelines
 
-## Learn More
+We welcome contributions! Please follow these steps:
 
-To learn more about Next.js, take a look at the following resources:
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature-branch`)
+3. Commit your changes (`git commit -m 'Add some feature'`)
+4. Push to the branch (`git push origin feature-branch`)
+5. Open a pull request
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License Information
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-## Deploy on Vercel
+## Acknowledgements
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# web3-wallet-dashboard
+- [React](https://reactjs.org/)
+- [Next.js](https://nextjs.org/)
+- [ethers.js](https://docs.ethers.io/v5/)
+- [wagmi](https://wagmi.sh/)
+- [MetaMask](https://metamask.io/)
