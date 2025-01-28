@@ -1,22 +1,56 @@
 import { useState } from 'react';
+import { useAccount, useNetwork, useWalletClient } from 'wagmi';
+import { ethers } from 'ethers';
 import styles from '@/styles/DAppInteraction.module.css';
 
 export default function DAppInteraction() {
-  // State for form inputs and interaction result
   const [contractAddress, setContractAddress] = useState('');
   const [functionName, setFunctionName] = useState('');
   const [functionArgs, setFunctionArgs] = useState('');
   const [result, setResult] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Function to handle DApp interaction (placeholder implementation)
+  const { address } = useAccount();
+  const { chain } = useNetwork();
+  const { data: walletClient } = useWalletClient();
+
   const handleInteraction = async () => {
-    try {
-      // TODO: Implement actual DApp interaction logic
-      // This would involve creating a contract instance and calling the specified function
+    if (!address || !chain || !walletClient) {
+      setResult('Please connect your wallet first.');
+      return;
+    }
 
-      setResult('Interaction successful! (This is a placeholder result)');
+    setIsLoading(true);
+    setResult('');
+
+    try {
+      // Create a contract instance
+      const provider = new ethers.BrowserProvider(walletClient.transport);
+      const signer = await provider.getSigner();
+      const contract = new ethers.Contract(
+        contractAddress,
+        [
+          `function ${functionName}(${functionArgs
+            .split(',')
+            .map(() => 'address')
+            .join(',')}) public view returns (uint256)`,
+        ],
+        signer
+      );
+
+      // Parse function arguments
+      const args = functionArgs.split(',').map((arg) => arg.trim());
+
+      // Call the specified function
+      const tx = await contract[functionName](...args);
+      const result = await tx;
+
+      setResult(`Function call successful. Result: ${result.toString()}`);
     } catch (error) {
-      setResult('Error: ' + (error as Error).message);
+      console.error('Error interacting with contract:', error);
+      setResult(`Error: ${(error as Error).message}`);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -48,7 +82,7 @@ export default function DAppInteraction() {
             type='text'
             value={functionName}
             onChange={(e) => setFunctionName(e.target.value)}
-            placeholder='transfer'
+            placeholder='balanceOf'
             className={styles.input}
           />
         </div>
@@ -62,13 +96,17 @@ export default function DAppInteraction() {
             type='text'
             value={functionArgs}
             onChange={(e) => setFunctionArgs(e.target.value)}
-            placeholder='0x123..., 100'
+            placeholder='0x123...'
             className={styles.input}
           />
         </div>
         {/* Interaction button */}
-        <button onClick={handleInteraction} className={styles.button}>
-          Interact with DApp
+        <button
+          onClick={handleInteraction}
+          className={styles.button}
+          disabled={isLoading}
+        >
+          {isLoading ? 'Interacting...' : 'Interact with DApp'}
         </button>
       </form>
       {/* Display interaction result */}
