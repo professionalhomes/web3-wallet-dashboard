@@ -44,10 +44,10 @@ Web3 Wallet Dashboard is a modern, user-friendly interface for interacting with 
 
 ## Usage Guide
 
-Connect your wallet: Click on the "Connect Wallet" button to connect your Web3 wallet (e.g., MetaMask).
-View balance: Once connected, your wallet's ETH balance will be displayed in real-time.
-Transaction history: View your recent transactions in the "Transaction History" tab.
-Interact with dApps: Use the "DApp Interaction" tab to interact with smart contracts and decentralized applications.
+1. Connect your wallet: Click on the "Connect Wallet" button to connect your Web3 wallet (e.g., MetaMask).
+2. View balance: Once connected, your wallet's ETH balance will be displayed in real-time.
+3. Transaction history: View your recent transactions in the "Transaction History" tab.
+4. Interact with dApps: Use the "DApp Interaction" tab to interact with smart contracts and decentralized applications.
 
 ## Project Structure
 
