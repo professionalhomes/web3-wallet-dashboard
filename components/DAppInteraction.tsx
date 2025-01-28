@@ -2,18 +2,17 @@ import { useState } from 'react';
 import styles from '@/styles/DAppInteraction.module.css';
 
 export default function DAppInteraction() {
+  // State for form inputs and interaction result
   const [contractAddress, setContractAddress] = useState('');
   const [functionName, setFunctionName] = useState('');
   const [functionArgs, setFunctionArgs] = useState('');
   const [result, setResult] = useState('');
 
+  // Function to handle DApp interaction (placeholder implementation)
   const handleInteraction = async () => {
     try {
-      // This is a simplified example. In a real application, you would need to:
-      // 1. Connect to the user's wallet
-      // 2. Create a contract instance
-      // 3. Call the specified function with the provided arguments
-      // 4. Handle the result
+      // TODO: Implement actual DApp interaction logic
+      // This would involve creating a contract instance and calling the specified function
 
       setResult('Interaction successful! (This is a placeholder result)');
     } catch (error) {
@@ -25,6 +24,7 @@ export default function DAppInteraction() {
     <div className={styles.dappInteraction}>
       <h2>DApp Interaction</h2>
       <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
+        {/* Contract address input */}
         <div className={styles.formGroup}>
           <label htmlFor='contractAddress' className={styles.label}>
             Contract Address
@@ -38,6 +38,7 @@ export default function DAppInteraction() {
             className={styles.input}
           />
         </div>
+        {/* Function name input */}
         <div className={styles.formGroup}>
           <label htmlFor='functionName' className={styles.label}>
             Function Name
@@ -51,6 +52,7 @@ export default function DAppInteraction() {
             className={styles.input}
           />
         </div>
+        {/* Function arguments input */}
         <div className={styles.formGroup}>
           <label htmlFor='functionArgs' className={styles.label}>
             Function Arguments (comma-separated)
@@ -64,10 +66,12 @@ export default function DAppInteraction() {
             className={styles.input}
           />
         </div>
+        {/* Interaction button */}
         <button onClick={handleInteraction} className={styles.button}>
           Interact with DApp
         </button>
       </form>
+      {/* Display interaction result */}
       {result && (
         <div className={styles.result}>
           <p>{result}</p>

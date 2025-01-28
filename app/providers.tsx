@@ -5,8 +5,10 @@ import { mainnet } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 
+// Retrieve the Alchemy API key from environment variables
 const alchemyApiKey = process.env.NEXT_PUBLIC_ALCHEMY_API_KEY as string;
 
+// Configure the blockchain providers and chains
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [mainnet],
   [
@@ -27,12 +29,14 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
   ]
 );
 
+// Create the Wagmi configuration
 const config = createConfig({
   autoConnect: true,
   publicClient,
   webSocketPublicClient,
 });
 
+// Providers component to wrap the application with WagmiConfig
 export function Providers({ children }: { children: React.ReactNode }) {
   return <WagmiConfig config={config}>{children}</WagmiConfig>;
 }

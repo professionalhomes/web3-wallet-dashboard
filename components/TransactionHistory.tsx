@@ -4,6 +4,7 @@ import { Alchemy, Network, AssetTransfersCategory } from 'alchemy-sdk';
 import styles from '@/styles/TransactionHistory.module.css';
 import { ClipboardCopy } from 'lucide-react';
 
+// Define the structure of a transaction
 interface Transaction {
   hash: string;
   from: string;
@@ -20,6 +21,7 @@ export default function TransactionHistory() {
   const [copiedText, setCopiedText] = useState<string | null>(null);
 
   useEffect(() => {
+    // Function to fetch transactions from the Alchemy API
     async function fetchTransactions() {
       if (!address) return;
 
@@ -27,12 +29,14 @@ export default function TransactionHistory() {
       setError(null);
 
       try {
+        // Configure Alchemy SDK
         const config = {
           apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY,
           network: Network.ETH_MAINNET,
         };
         const alchemy = new Alchemy(config);
 
+        // Fetch asset transfers for the connected address
         const data = await alchemy.core.getAssetTransfers({
           fromBlock: '0x0',
           fromAddress: address,
@@ -43,6 +47,7 @@ export default function TransactionHistory() {
           maxCount: 10,
         });
 
+        // Format the fetched transactions
         const formattedTransactions: Transaction[] = data.transfers.map(
           (tx) => ({
             hash: tx.hash,
@@ -65,17 +70,20 @@ export default function TransactionHistory() {
     fetchTransactions();
   }, [address]);
 
+  // Function to copy text to clipboard
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text).then(() => {
       setCopiedText(text);
-      setTimeout(() => setCopiedText(null), 2000);
+      setTimeout(() => setCopiedText(null), 2000); // Reset copied text after 2 seconds
     });
   };
 
+  // Function to truncate addresses for display
   const truncateAddress = (address: string) => {
     return `${address.slice(0, 6)}...${address.slice(-4)}`;
   };
 
+  // Component to render an address with a copy button
   const renderAddress = (address: string) => (
     <div className={styles.addressContainer}>
       <span className={styles.address}>{truncateAddress(address)}</span>
