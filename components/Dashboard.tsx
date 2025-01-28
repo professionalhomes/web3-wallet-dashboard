@@ -9,17 +9,13 @@ import DAppInteraction from './DAppInteraction';
 import styles from '@/styles/Dashboard.module.css';
 
 export default function Dashboard() {
-  // Get account information and connection methods from wagmi
   const { address, isConnected } = useAccount();
   const { connect } = useConnect({
     connector: new InjectedConnector(),
   });
   const { disconnect } = useDisconnect();
-
-  // State to manage active tab
   const [activeTab, setActiveTab] = useState('wallet');
 
-  // If not connected, show connect wallet button
   if (!isConnected) {
     return (
       <div className={styles.centerContent}>
@@ -34,7 +30,6 @@ export default function Dashboard() {
     );
   }
 
-  // If connected, show the dashboard
   return (
     <div className={styles.dashboard}>
       <header className={styles.header}>
@@ -47,7 +42,6 @@ export default function Dashboard() {
       </header>
       <main className={styles.main}>
         <div className='container'>
-          {/* Tab navigation */}
           <div className={styles.tabs}>
             <button
               onClick={() => setActiveTab('wallet')}
@@ -74,12 +68,9 @@ export default function Dashboard() {
               DApps
             </button>
           </div>
-          {/* Content based on active tab */}
           <div className={styles.content}>
             {activeTab === 'wallet' && <WalletInfo address={address} />}
-            {activeTab === 'transactions' && (
-              <TransactionHistory address={address} />
-            )}
+            {activeTab === 'transactions' && <TransactionHistory />}
             {activeTab === 'dapps' && <DAppInteraction />}
           </div>
         </div>

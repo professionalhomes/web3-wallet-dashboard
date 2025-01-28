@@ -17,12 +17,8 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
       rpc: (chain) => {
         if (chain.id !== mainnet.id) return null;
         return {
-          http: [
-            `https://worldchain-mainnet.g.alchemy.com/v2/${alchemyApiKey}`,
-          ],
-          webSocket: [
-            `wss://worldchain-mainnet.g.alchemy.com/v2/${alchemyApiKey}`,
-          ],
+          http: `https://worldchain-mainnet.g.alchemy.com/v2/${alchemyApiKey}`,
+          webSocket: `wss://worldchain-mainnet.g.alchemy.com/v2/${alchemyApiKey}`,
         };
       },
     }),
