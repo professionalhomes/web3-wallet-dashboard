@@ -20,6 +20,8 @@ Web3 Wallet Dashboard is a modern, user-friendly interface for interacting with 
 - TypeScript
 - ethers.js
 - wagmi
+- AlchemySDK
+- Viem
 
 ## Setup and Installation
 
