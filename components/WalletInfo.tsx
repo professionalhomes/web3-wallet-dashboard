@@ -5,6 +5,8 @@ interface WalletInfoProps {
   address: `0x${string}` | undefined;
 }
 
+
+
 export default function WalletInfo({ address }: WalletInfoProps) {
   // Fetch balance for the connected wallet
   const { data: balance } = useBalance({
